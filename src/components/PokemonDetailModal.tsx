@@ -170,7 +170,7 @@ export function PokemonDetailModal({
         className={cn(
           "min-w-[200px] sm:min-w-[900px] md:min-w-[1000px]",
           "max-w-6xl w-[95vw] sm:w-[90vw] md:w-[85vw]",
-          "max-h-[90vh] overflow-hidden p-0",
+          "max-h-[90vh] overflow-y-auto md:overflow-hidden p-0",
           "bg-linear-to-br from-card/95 to-card/90",
           "border-2 border-border/50",
           "backdrop-blur-xl",
@@ -183,15 +183,15 @@ export function PokemonDetailModal({
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
           </div>
         ) : pokemon ? (
-          <div className="flex flex-col md:flex-row max-h-[90vh] overflow-hidden">
+          <div className="flex flex-col md:flex-row max-h-[90vh] overflow-y-auto md:overflow-hidden">
             {/* Left Section - Image */}
             <div
               className={cn(
-                "flex flex-col items-center justify-center p-8 md:p-12 relative",
+                "flex flex-col items-center justify-center p-4 md:p-12 relative",
                 "bg-linear-to-br from-background/90 via-background/70 to-background/50",
                 "md:w-2/5 md:border-r-2 border-border/50",
-                "min-h-[300px] md:min-h-0",
-                "overflow-hidden"
+                "min-h-[200px] md:min-h-0",
+                "shrink-0"
               )}
             >
               {/* Subtle geometric pattern overlay */}
@@ -208,7 +208,7 @@ export function PokemonDetailModal({
                 initial={{ scale: 0.8, opacity: 0, x: -20 }}
                 animate={{ scale: 1, opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="relative mb-6"
+                className="relative mb-3 md:mb-6"
               >
                 {imageLoaded && currentSpriteUrl ? (
                   <motion.div
@@ -226,7 +226,7 @@ export function PokemonDetailModal({
                     <motion.img
                       src={imageError ? fallbackImageUrl : currentSpriteUrl}
                       alt={`${pokemon.name} ${selectedVariant}`}
-                      className="h-64 w-64 md:h-80 md:w-80 object-contain relative z-10"
+                      className="h-32 w-32 sm:h-40 sm:w-40 md:h-80 md:w-80 object-contain relative z-10"
                       style={{
                         filter:
                           selectedVariant.includes("shiny") && !imageError
@@ -271,7 +271,7 @@ export function PokemonDetailModal({
                     />
                   </motion.div>
                 ) : (
-                  <div className="h-64 w-64 md:h-80 md:w-80 bg-muted rounded-full animate-pulse" />
+                  <div className="h-32 w-32 sm:h-40 sm:w-40 md:h-80 md:w-80 bg-muted rounded-full animate-pulse" />
                 )}
               </motion.div>
 
@@ -281,7 +281,7 @@ export function PokemonDetailModal({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="flex gap-2 flex-wrap justify-center"
+                  className="flex gap-1.5 md:gap-2 flex-wrap justify-center mb-2 md:mb-0"
                 >
                   {spriteVariants.map((variant) => (
                     <motion.button
@@ -301,7 +301,7 @@ export function PokemonDetailModal({
                         <img
                           src={variant.url || ""}
                           alt={variant.label}
-                          className="h-12 w-12 object-contain"
+                          className="h-8 w-8 md:h-12 md:w-12 object-contain"
                           onError={(e) => {
                             // Hide broken images
                             e.currentTarget.style.display = "none";
@@ -335,11 +335,11 @@ export function PokemonDetailModal({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-6 text-center"
+                className="mt-2 md:mt-6 text-center"
               >
                 <motion.h2
                   className={cn(
-                    "text-3xl md:text-4xl font-display font-bold capitalize mb-3 tracking-wider",
+                    "text-xl sm:text-2xl md:text-4xl font-display font-bold capitalize mb-2 md:mb-3 tracking-wider",
                     "relative inline-block"
                   )}
                 >
@@ -375,7 +375,7 @@ export function PokemonDetailModal({
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="mb-4"
+                  className="mb-2 md:mb-4"
                 >
                   <span className="text-sm font-semibold text-muted-foreground bg-background/80 px-3 py-1 rounded-full">
                     #{String(pokemon.id).padStart(4, "0")}
@@ -413,7 +413,7 @@ export function PokemonDetailModal({
             </div>
 
             {/* Right Section - Stats and Info */}
-            <div className="flex-1 overflow-y-auto max-h-[90vh] bg-background/50 backdrop-blur-sm">
+            <div className="flex-1 md:overflow-y-auto md:max-h-[90vh] bg-background/50 backdrop-blur-sm">
               <DialogHeader className="px-6 pt-6 pb-4 border-b-2 border-border/50">
                 <h3 className="text-xl font-bold font-display tracking-wide text-primary">
                   Pokemon Details
