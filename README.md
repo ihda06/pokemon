@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# DIPA Inhouse - Technical Test: Pokemon API Integration
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyek ini merupakan technical test untuk DIPA Inhouse yang fokus pada integrasi API. Aplikasi ini menampilkan daftar Pokemon dengan detail lengkap menggunakan PokeAPI sebagai sumber data.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Framework
 
-## React Compiler
+- **React 19** - Library UI modern dengan performa tinggi dan developer experience yang baik
+- **TypeScript** - Type safety untuk mengurangi bug dan meningkatkan maintainability code
+- **Vite** - Build tool yang ringan dan cepat, dipilih karena kebutuhan utama proyek adalah integrasi API. Vite memberikan HMR (Hot Module Replacement) yang sangat cepat dan build time yang minimal, sehingga sangat cocok untuk development yang fokus pada API integration
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### State Management & Data Fetching
 
-## Expanding the ESLint configuration
+- **TanStack React Query** - Library untuk data fetching, caching, dan state management yang efisien. Memudahkan handling loading states, error handling, dan caching untuk API responses
+- **Axios** - HTTP client untuk melakukan request ke API dengan konfigurasi yang fleksibel
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Styling & UI Components
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **shadcn/ui** - Komponen UI yang dapat dikustomisasi dan accessible, dibangun di atas Radix UI dan Tailwind CSS. Menggunakan pendekatan copy-paste components yang memberikan fleksibilitas penuh untuk modifikasi
+- **Tailwind CSS** - Utility-first CSS framework untuk styling yang cepat dan konsisten
+- **Radix UI** - Headless UI components (Dialog, Popover, Slot) yang accessible dan customizable, digunakan sebagai base untuk shadcn/ui components
+- **Lucide React** - Icon library yang modern dan ringan
+- **Motion (Framer Motion)** - Library animasi untuk memberikan pengalaman pengguna yang lebih interaktif
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Development Tools
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **ESLint** - Code linting untuk menjaga kualitas code
+- **Husky** - Git hooks untuk pre-commit checks
+- **TypeScript ESLint** - Type-aware linting rules
+
+## Alasan Pemilihan Tech Stack
+
+1. **Vite** - Dipilih karena ringan dan cepat, sangat cocok untuk proyek yang fokus pada integrasi API. Development server yang cepat memungkinkan iterasi yang lebih cepat saat bekerja dengan API endpoints.
+
+2. **React Query** - Memudahkan management state untuk data dari API, termasuk caching, refetching, dan error handling yang built-in.
+
+3. **TypeScript** - Memberikan type safety untuk response dari API, mengurangi kemungkinan error saat handling data.
+
+4. **shadcn/ui** - Menyediakan komponen UI yang siap pakai dan dapat dikustomisasi. Pendekatan copy-paste components memungkinkan full control terhadap kode komponen, berbeda dengan library komponen tradisional yang locked-in.
+
+5. **Tailwind CSS** - Mempercepat development UI tanpa perlu menulis CSS custom yang banyak.
+
+6. **Axios** - Lebih mudah dikonfigurasi dibanding fetch native, dengan interceptors dan error handling yang lebih baik.
+
+## Fitur
+
+- 📋 Daftar Pokemon dengan pagination
+- 🔍 Pencarian Pokemon berdasarkan nama
+- 🎯 Filter berdasarkan tipe Pokemon
+- 📱 Responsive design
+- ⚡ Fast loading dengan React Query caching
+- 🎨 Modern UI dengan animasi smooth
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 atau lebih baru)
+- npm atau yarn
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## API Integration
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Proyek ini mengintegrasikan dengan [PokeAPI](https://pokeapi.co/) untuk mendapatkan data Pokemon. Semua API calls dihandle melalui service layer di `src/services/pokemon.ts` dengan menggunakan Axios dan React Query untuk caching.
